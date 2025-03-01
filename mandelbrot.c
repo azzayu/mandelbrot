@@ -201,6 +201,6 @@ int main(int argc, char **argv){
 
     t = time(NULL) - t;
 
-    printf("\rrendering complete %s in %i seconds\n", argv[2], t);
+    printf("\rrendering of %s complete in %i seconds                                                                       \n", argv[2], t);
     return EXIT_SUCCESS;
 }
