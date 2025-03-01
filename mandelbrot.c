@@ -189,7 +189,11 @@ int main(int argc, char **argv){
         image = time_to_colour(div_time, all_colours, nb_col * col_step);
         fwrite((const void *) &image, 3, 1, output);
 
-        fprintf(stdout, "\rwe're %lf percent done", (double) i / (double) (x_size * y_size) * 100);
+        int current_time = time(NULL) - t;
+        double fraction_done =  (double) i / (double) (x_size * y_size);
+        int time_left = (int) ((double) current_time / fraction_done * (1.0 - fraction_done));
+
+        fprintf(stdout, "\rwe're %lf percent done in %li seconds, estimated time until the end : %i seconds                    ", fraction_done * 100, time(NULL) - t, time_left);
         fflush(stdout);
     }
 
