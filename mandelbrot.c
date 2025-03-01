@@ -188,13 +188,15 @@ int main(int argc, char **argv){
         div_time = diverge(pixels, iter_max);
         image = time_to_colour(div_time, all_colours, nb_col * col_step);
         fwrite((const void *) &image, 3, 1, output);
-    }
 
+        fprintf(stdout, "\rwe're %lf percent done", (double) i / (double) (x_size * y_size) * 100);
+        fflush(stdout);
+    }
 
     fclose(output);
 
     t = time(NULL) - t;
 
-    printf("rendering complete %s in %i seconds\n", argv[2], t);
+    printf("\rrendering complete %s in %i seconds\n", argv[2], t);
     return EXIT_SUCCESS;
 }
