@@ -298,6 +298,7 @@ void print_colour(int red, int green, int blue){
     }
 }
 
+
 void display_preview(double x_min, double x_max, double y_min, double y_max, int iter_max, uint8_t **all_colours, int nb_col, int col_step){
 
     uint32_t image;
@@ -328,6 +329,7 @@ void display_preview(double x_min, double x_max, double y_min, double y_max, int
     }
     printf("%s\n",BRIGHT_WHITE);
 }
+
 
 int main(int argc, char **argv){
 
