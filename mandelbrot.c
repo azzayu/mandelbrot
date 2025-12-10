@@ -298,6 +298,19 @@ void print_colour(int red, int green, int blue){
     }
 }
 
+int min(int a, int b){
+    if (a < b){
+        return a;
+    }
+    return b;
+}
+
+int max(int a, int b){
+    if (a > b){
+        return a;
+    }
+    return b;
+}
 
 void display_preview(double x_min, double x_max, double y_min, double y_max, int iter_max, uint8_t **all_colours, int nb_col, int col_step){
 
@@ -360,10 +373,24 @@ int main(int argc, char **argv){
     uint8_t **colours = get_colours(config, &col_step, &nb_col);
     uint8_t **all_colours = smoothing(colours, col_step, nb_col);
 
-    double x_min = x_center - inter_len / 2.0;
-    double y_min = y_center - inter_len / 2.0;
-    double x_max = x_center + inter_len / 2.0;
-    double y_max = y_center + inter_len / 2.0;
+    double ratio = max(x_size, y_size) / min(x_size, y_size);
+
+    double x_min;
+    double y_min;
+    double x_max;
+    double y_max;
+
+    if (x_size < y_size){
+        x_min = x_center - inter_len / 2.0;
+        y_min = y_center - inter_len / 2.0 * ratio;
+        x_max = x_center + inter_len / 2.0;
+        y_max = y_center + inter_len / 2.0 * ratio;
+    } else {
+        x_min = x_center - inter_len / 2.0 * ratio;
+        y_min = y_center - inter_len / 2.0;
+        x_max = x_center + inter_len / 2.0 * ratio;
+        y_max = y_center + inter_len / 2.0;
+    }
 
     fprintf(output, "P6\n%i  %i\n255\n", x_size, y_size);
 
